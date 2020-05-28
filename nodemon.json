@@ -1,0 +1,7 @@
+{
+    "env": {
+        "MONGO_ATLAS_UN": "alex_moody",
+        "MONGO_ATLAS_PW": "mGIBRbMMyvTQAmYq", 
+        "JWT_KEY": "A6FA4366CE58A21EDF5708531C43D5FB5C2ECB5C61E854A2B53E46A9B4127FCF"
+    }
+}

@@ -1,40 +1,37 @@
-import { AppRoutingModule } from './app-routing.module';
 import { NgModule } from '@angular/core';
+import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { MatInputModule } from '@angular/material/input';
-import { MatToolbarModule } from '@angular/material/toolbar';
+import { AngularMaterialModule } from './angular-material.module';
+import { PostsModule } from './posts/posts.module';
 
 import { AppComponent } from './app.component';
+import { ErrorComponent } from './error/error.component';
 import { HeaderComponent } from './header/header.component';
-import { PostCreateComponent } from './posts/post-create/post-create.component';
-import { PostListComponent } from './posts/post-list/post-list.component';
+
+import { AuthInterceptor } from './auth/auth-interceptor';
+import { ErrorInterceptor } from './error-interceptor';
 
 @NgModule({
   declarations: [
-    AppComponent, 
-    HeaderComponent,
-    PostCreateComponent,
-    PostListComponent
+    AppComponent,
+    ErrorComponent,
+    HeaderComponent
   ],
   imports: [
     AppRoutingModule,
     BrowserModule,
-    FormsModule, 
     HttpClientModule,
     BrowserAnimationsModule, 
-    MatButtonModule,
-    MatCardModule,
-    MatExpansionModule,
-    MatInputModule, 
-    MatToolbarModule
+    AngularMaterialModule,
+    PostsModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }, 
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+  ],
+  bootstrap: [AppComponent], 
+  entryComponents: [ErrorComponent]
 })
 export class AppModule { }
