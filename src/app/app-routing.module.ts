@@ -13,7 +13,12 @@ const routes: Routes = [
     loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) 
   },
   { path: 'create', component: PostCreateComponent, canActivate: [AuthGuard] }, 
-  { path: 'edit/:postId', component: PostCreateComponent, canActivate: [AuthGuard] }
+  { path: 'edit/:postId', component: PostCreateComponent, canActivate: [AuthGuard] }, 
+  {
+    path: 'clubs', 
+    loadChildren: () => import('./clubs/clubs.module').then(m => m.ClubsModule), 
+    canActivate: [AuthGuard]
+  }
 ];
 
 @NgModule({

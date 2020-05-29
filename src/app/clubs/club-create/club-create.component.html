@@ -1,0 +1,25 @@
+<mat-card>
+    <form [formGroup]="form" (submit)="onSaveClub()">
+        <mat-form-field>
+            <input matInput type="text" formControlName="name" placeholder="Club name" />
+            <mat-error *ngIf="form.get('name').invalid">Please enter a club name</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput type="url" formControlName="crestUrl" placeholder="Club crest url" />
+            <mat-error *ngIf="form.get('crestUrl').invalid">Please enter a crest url</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput type="url" formControlName="website" placeholder="Club website" />
+            <mat-error *ngIf="form.get('website').invalid">Please enter a club website</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput type="color" formControlName="color" placeholder="Club color" />
+            <mat-error *ngIf="form.get('color').invalid">Please enter a club color</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput type="text" formControlName="venue" placeholder="Club venue" />
+            <mat-error *ngIf="form.get('venue').invalid">Please enter a club venue</mat-error>
+        </mat-form-field>
+        <button mat-raised-button color="accent" type="submit">Save</button>
+    </form>
+</mat-card>
