@@ -4,6 +4,10 @@ const mongoose = require('mongoose');
 const path = require('path');
 const clubRoutes = require('./routes/club');
 const clubsRoutes = require('./routes/clubs');
+const nationsRoutes = require('./routes/nations');
+const playerRoutes = require('./routes/player');
+const playersRoutes = require('./routes/players');
+const positionsRoutes = require('./routes/positions');
 const postsRoutes = require('./routes/posts');
 const userRoutes = require('./routes/user');
 
@@ -38,6 +42,10 @@ app.use((req, res, next) => {
 
 app.use('/api/club', clubRoutes);
 app.use('/api/clubs', clubsRoutes);
+app.use('/api/nations', nationsRoutes);
+app.use('/api/player', playerRoutes);
+app.use('/api/players', playersRoutes);
+app.use('/api/positions', positionsRoutes);
 app.use('/api/posts', postsRoutes);
 app.use('/api/user', userRoutes);
 

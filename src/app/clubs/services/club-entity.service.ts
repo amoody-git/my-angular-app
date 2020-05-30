@@ -3,7 +3,7 @@ import { EntityCollectionServiceBase, EntityCollectionServiceElementsFactory } f
 import { Club } from '../model/club';
 
 @Injectable({ providedIn: 'root' })
-export class ClubsEntityService extends EntityCollectionServiceBase<Club> {
+export class ClubEntityService extends EntityCollectionServiceBase<Club> {
 
     constructor(serviceElementsFactory: EntityCollectionServiceElementsFactory) {
         super('Club', serviceElementsFactory);

@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { ClubsEntityService } from '../services/clubs-entity.service';
+import { ClubEntityService } from '../services/club-entity.service';
 import { Club } from '../model/club';
-import { Update } from '@ngrx/entity';
 
 @Component({
   selector: 'app-club-create',
@@ -17,7 +16,7 @@ export class ClubCreateComponent implements OnInit {
   private mode = 'create';
   private clubId: string;
 
-  constructor(private clubsService: ClubsEntityService,
+  constructor(private clubService: ClubEntityService,
               private route: ActivatedRoute, 
               private router: Router) { }
 
@@ -33,7 +32,7 @@ export class ClubCreateComponent implements OnInit {
       if (paramMap.has('clubId')) {
         this.mode = 'edit';
         this.clubId = paramMap.get('clubId');
-        this.clubsService.getByKey(this.clubId).subscribe(club => {
+        this.clubService.getByKey(this.clubId).subscribe(club => {
           this.club = club;
           this.form.patchValue({...this.club});
         })
@@ -52,11 +51,11 @@ export class ClubCreateComponent implements OnInit {
     };
 
     if (this.mode === 'create') {
-      this.clubsService.add(club).subscribe(() => {
+      this.clubService.add(club).subscribe(() => {
         this.router.navigate(['/clubs']);
       });
     } else {
-      this.clubsService.update(club);
+      this.clubService.update(club);
       this.router.navigate(['/clubs']);
     }
   }

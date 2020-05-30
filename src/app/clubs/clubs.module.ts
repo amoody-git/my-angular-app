@@ -8,20 +8,27 @@ import { ClubsRoutingModule } from './clubs-routing.module';
 
 import { ClubsDataService } from './services/clubs-data.service';
 
+import { ClubComponent } from './club/club.component';
 import { ClubCreateComponent } from './club-create/club-create.component';
 import { ClubListComponent } from './club-list/club-list.component';
 
-import { sortClubsByName, Club } from './model/club';
+import { Club, sortClubsByName } from './model/club';
+import { Player, sortPlayers } from './model/player';
 
 const entityMetadata: EntityMetadataMap = {
     Club: { 
         selectId: (club: Club) => club._id,
         sortComparer: sortClubsByName
+    }, 
+    Player: {
+        selectId: (player: Player) => player._id, 
+        sortComparer: sortPlayers
     }
 };
 
 @NgModule({
     declarations: [
+        ClubComponent,
         ClubCreateComponent,
         ClubListComponent
     ],

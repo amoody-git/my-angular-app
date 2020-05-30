@@ -5,7 +5,7 @@ const PostsController = require('../controllers/posts');
 
 const router = express.Router();
 
-router.get('', PostsController.getAllPosts);
+router.get('', PostsController.searchPosts);
 
 router.get('/:id', PostsController.getPostById);
 

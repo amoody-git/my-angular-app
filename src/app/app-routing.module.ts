@@ -16,8 +16,7 @@ const routes: Routes = [
   { path: 'edit/:postId', component: PostCreateComponent, canActivate: [AuthGuard] }, 
   {
     path: 'clubs', 
-    loadChildren: () => import('./clubs/clubs.module').then(m => m.ClubsModule), 
-    canActivate: [AuthGuard]
+    loadChildren: () => import('./clubs/clubs.module').then(m => m.ClubsModule)
   }
 ];
 

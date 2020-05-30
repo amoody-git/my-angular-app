@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ClubsEntityService } from '../services/clubs-entity.service';
+import { ClubEntityService } from '../services/club-entity.service';
 import { Club } from '../model/club';
 
 @Component({
@@ -13,10 +13,10 @@ export class ClubListComponent implements OnInit {
   clubs$: Observable<Club[]>;
   loading$: Observable<boolean>;
 
-  constructor(private clubsService: ClubsEntityService) { }
+  constructor(private clubService: ClubEntityService) { }
 
   ngOnInit(): void {
-    this.clubs$ = this.clubsService.entities$;
-    this.loading$ = this.clubsService.loading$;
+    this.clubs$ = this.clubService.entities$;
+    this.loading$ = this.clubService.loading$;
   }
 }

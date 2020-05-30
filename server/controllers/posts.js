@@ -1,6 +1,6 @@
 const Post = require('../models/post');
 
-exports.getAllPosts = (req, res, next) => {
+exports.searchPosts = (req, res, next) => {
     const currentPage = +req.query.page;
     const pageSize = +req.query.pagesize;
     const postQuery = Post.find();

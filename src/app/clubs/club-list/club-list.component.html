@@ -5,10 +5,9 @@
                 <img [src]="club.crestUrl" />
             </div>
             <div class="tile-info">
-                <div>{{ club.name }}</div>
-                <div>{{ club.venue }}</div>
-                <p><a class="tile-link" target="_blank" [attr.href]="club.website">Club website >></a></p>
-                <a mat-button color="primary" [routerLink]="['/clubs/edit', club._id]">EDIT</a>
+                <p>{{ club.name }}</p>
+                <p>{{ club.venue }}</p>
+                <p>Official website: <a class="tile-link" target="_blank" [attr.href]="club.website">{{ club.website }}</a></p>
             </div>
         </div>
     </mat-grid-tile>
