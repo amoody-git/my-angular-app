@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const path = require('path');
 const clubRoutes = require('./routes/club');
+const clubsRoutes = require('./routes/clubs');
 const postsRoutes = require('./routes/posts');
 const userRoutes = require('./routes/user');
 
@@ -35,7 +36,8 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use('/api', clubRoutes);
+app.use('/api/club', clubRoutes);
+app.use('/api/clubs', clubsRoutes);
 app.use('/api/posts', postsRoutes);
 app.use('/api/user', userRoutes);
 

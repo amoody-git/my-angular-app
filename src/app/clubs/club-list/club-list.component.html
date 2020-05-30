@@ -1,17 +1,15 @@
-<div fxLayout="row" fxFlex.md="70" fxLayoutWrap class="card-list-container mat-elevation-z4">
-    <div fxFlex *ngFor="let club of clubs$ | async" class="card-item">
-        <mat-card>
-            <mat-card-header>
-                <mat-card-title>{{ club.name }}</mat-card-title>
-            </mat-card-header>
-            <img mat-card-image [src]="club.crestUrl" />
-            <mat-card-content>
+<mat-grid-list cols="5" [gutterSize]="'0.5rem'" >
+    <mat-grid-tile [colspan]="1" [rowspan]="1" *ngFor="let club of clubs$ | async">
+        <div class="tile-content" [style.background-color]="club.color">
+            <div class="tile-image">
+                <img [src]="club.crestUrl" />
+            </div>
+            <div class="tile-info">
+                <div>{{ club.name }}</div>
                 <div>{{ club.venue }}</div>
-                <a>{{ club.website }}</a>
-            </mat-card-content>
-            <mat-card-actions>
+                <p><a class="tile-link" target="_blank" [attr.href]="club.website">Club website >></a></p>
                 <a mat-button color="primary" [routerLink]="['/clubs/edit', club._id]">EDIT</a>
-            </mat-card-actions>
-        </mat-card>
-    </div>
-</div>
+            </div>
+        </div>
+    </mat-grid-tile>
+</mat-grid-list>

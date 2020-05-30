@@ -1,12 +1,5 @@
 const Club = require('../models/club');
 
-exports.getAllClubs = (req, res, next) => {
-    Club.find()
-        .then(documents => {
-            res.status(200).json(documents);
-        });
-};
-
 exports.getClubById = (req, res, next) => {
     Club.findById(req.params.id).then(club => {
         if (club) {
@@ -33,3 +26,26 @@ exports.createClub = (req, res, next) => {
             res.status(500).json({ message: "Failed to create club!" })
         });
 };
+
+exports.updateClub = (req, res, next) => {
+    const club = new Club({
+        _id: req.params.id,
+        name: req.body.name,
+        crestUrl: req.body.crestUrl, 
+        website: req.body.website,  
+        color: req.body.color, 
+        venue: req.body.venue
+    });
+
+    Club.updateOne({ _id: req.params.id }, club)
+        .then(result => {
+            if (result.n > 0) {
+                res.status(200).json("Club updated successfully!");
+            } else {
+                res.status(401).json({ message: "User is not authorized!" });
+            }
+        })
+        .catch(err => {
+            res.status(500).json({ message: "Failed to update club!" })
+        });
+}

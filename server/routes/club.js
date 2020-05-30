@@ -4,10 +4,10 @@ const ClubController = require('../controllers/club');
 
 const router = express.Router();
 
-router.get('/clubs', ClubController.getAllClubs);
+router.get('/:id', ClubController.getClubById);
 
-router.get('/club/:id', ClubController.getClubById);
+router.post('', checkAuth, ClubController.createClub);
 
-router.post('/club', checkAuth, ClubController.createClub);
+router.put('/:id', checkAuth, ClubController.updateClub);
 
 module.exports = router;

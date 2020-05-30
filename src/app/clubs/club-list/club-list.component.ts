@@ -11,14 +11,12 @@ import { Club } from '../model/club';
 export class ClubListComponent implements OnInit {
 
   clubs$: Observable<Club[]>;
+  loading$: Observable<boolean>;
 
   constructor(private clubsService: ClubsEntityService) { }
 
   ngOnInit(): void {
-    this.reload();
-  }
-
-  reload() {
     this.clubs$ = this.clubsService.entities$;
+    this.loading$ = this.clubsService.loading$;
   }
 }

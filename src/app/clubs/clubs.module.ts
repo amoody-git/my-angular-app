@@ -11,10 +11,11 @@ import { ClubsDataService } from './services/clubs-data.service';
 import { ClubCreateComponent } from './club-create/club-create.component';
 import { ClubListComponent } from './club-list/club-list.component';
 
-import { sortClubsByName } from './model/club';
+import { sortClubsByName, Club } from './model/club';
 
 const entityMetadata: EntityMetadataMap = {
     Club: { 
+        selectId: (club: Club) => club._id,
         sortComparer: sortClubsByName
     }
 };
