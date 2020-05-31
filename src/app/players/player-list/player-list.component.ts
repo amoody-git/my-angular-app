@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { PlayerEntityService } from '../services/player-entity.service';
+import { Player } from '../model/player';
 
 @Component({
   selector: 'app-player-list',
@@ -7,9 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlayerListComponent implements OnInit {
 
-  constructor() { }
+  players$: Observable<Player[]>;
+  loading$: Observable<boolean>;
+
+  displayedColumns = ['imageUrl', 'name', 'shirtNumber'];
+
+  constructor(private playerService: PlayerEntityService) { }
 
   ngOnInit(): void {
+    this.players$ = this.playerService.entities$;
+    this.loading$ = this.playerService.loading$;
   }
-
 }

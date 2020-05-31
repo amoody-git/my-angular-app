@@ -9,7 +9,7 @@ import { ClubCreateComponent } from './club-create/club-create.component';
 import { ClubListComponent } from './club-list/club-list.component';
 
 const routes: Routes = [
-    { path: '', component: ClubListComponent, resolve: { teams: ClubsResolver } },
+    { path: '', component: ClubListComponent, resolve: { clubs: ClubsResolver } },
     { path: '/:clubId', component: ClubComponent }, 
     { path: 'create', component: ClubCreateComponent, canActivate: [AuthGuard] }, 
     { path: 'edit/:clubId', component: ClubCreateComponent, canActivate: [AuthGuard] }

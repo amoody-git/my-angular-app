@@ -1,1 +1,22 @@
-<p>player-list works!</p>
+<mat-table class="mat-elevation-z8" [dataSource]="players$ | async">
+
+    <ng-container matColumnDef="imageUrl">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let player"> <img [src]="player.imageUrl" /></td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+      <mat-cell *matCellDef="let player">{{ player.name }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="shirtNumber">
+      <mat-header-cell *matHeaderCellDef>Shirt number</mat-header-cell>
+      <mat-cell *matCellDef="let player">{{ player.shirtNumber }}</mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+
+</mat-table>
