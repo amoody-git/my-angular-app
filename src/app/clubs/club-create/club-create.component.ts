@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Observable } from 'rxjs';
 import { ClubEntityService } from '../services/club-entity.service';
 import { Club } from '../model/club';
+import { map, finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-club-create',
@@ -32,10 +34,14 @@ export class ClubCreateComponent implements OnInit {
       if (paramMap.has('clubId')) {
         this.mode = 'edit';
         this.clubId = paramMap.get('clubId');
-        this.clubService.getByKey(this.clubId).subscribe(club => {
-          this.club = club;
-          this.form.patchValue({...this.club});
-        })
+        this.clubService.entities$
+          .pipe(
+            map(clubs => clubs.find(club => club._id === this.clubId))
+          )
+          .subscribe(club => {
+            this.club = club;
+            this.form.patchValue({...this.club});
+          });
       }
     })
   }

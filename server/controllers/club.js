@@ -1,9 +1,9 @@
 const Club = require('../models/club');
 
 exports.getClubById = (req, res, next) => {
-    Club.findById(req.params.id).then(club => {
-        if (club) {
-            res.status(200).json(club);
+    Club.findById(req.params.id).then(document => {
+        if (document) {
+            res.status(200).json(document);
         } else {
             res.status(404).json({ message: "Club not found!" });
         }
@@ -19,8 +19,8 @@ exports.createClub = (req, res, next) => {
         venue: req.body.venue
     });
     club.save()
-        .then(createdClub => {
-            res.status(201).json(createdClub);
+        .then(createdDocument => {
+            res.status(201).json(createdDocument);
         })
         .catch(err => {
             res.status(500).json({ message: "Failed to create club!" })

@@ -9,7 +9,8 @@ import { PlayerListComponent } from './player-list/player-list.component';
 
 const routes: Routes = [
     { path: '', component: PlayerListComponent, resolve: { players: PlayersResolver } }, 
-    { path: 'create', component: PlayerCreateComponent, canActivate: [AuthGuard] }
+    { path: 'create', component: PlayerCreateComponent, canActivate: [AuthGuard] }, 
+    { path: 'edit/:playerId', component: PlayerCreateComponent, canActivate: [AuthGuard] }
 ]
 
 @NgModule({

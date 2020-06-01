@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { PlayerEntityService } from '../services/player-entity.service';
 import { PlayersHttpService } from '../services/players-http.service';
 import { Nation } from '../model/nation';
@@ -15,10 +16,11 @@ import { Position } from '../model/position';
 })
 export class PlayerCreateComponent implements OnInit {
 
+  nations: Nation[];
   player: Player;
   form: FormGroup;
 
-  nations$: Observable<Nation[]>;
+  filteredNations$: Observable<Nation[]>;
   positions$: Observable<Position[]>;
 
   constructor(private playerService: PlayerEntityService,
@@ -34,8 +36,24 @@ export class PlayerCreateComponent implements OnInit {
       imageUrl: new FormControl(null, {}) 
     });
 
-    this.nations$ = this.playersHttpService.getNations();
+    this.playersHttpService.getNations().subscribe(fetchNations => {
+      this.nations = fetchNations;
+    });
+    this.filteredNations$ = this.form.get('nationality').valueChanges.pipe(
+      map(value => this.filterNations(value))
+    );
     this.positions$ = this.playersHttpService.getPositions();
+  }
+
+  displayNationality(nation: Nation): string {
+    return nation ? nation.name : "";
+  }
+
+  filterNations(value: string) {
+    if (typeof value === 'string' && value.trim() !== '') {
+      var filterValue = value.toLowerCase();
+      return this.nations.filter(n => n.name.toLowerCase().includes(filterValue));
+    }
   }
 
   onSavePlayer() {
@@ -43,10 +61,11 @@ export class PlayerCreateComponent implements OnInit {
       return;
     }
     
-    const player: Player = {
-      ...this.player, 
-      ...this.form.value
-    };
+    const player = {
+      ...this.form.value,
+      position: this.form.value.position._id,
+      nationality: this.form.value.nationality._id
+    }
 
     this.playerService.add(player).subscribe(() => {
       this.router.navigate(['/players']);

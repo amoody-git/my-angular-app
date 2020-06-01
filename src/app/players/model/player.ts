@@ -1,9 +1,12 @@
+import { Nation } from './nation';
+import { Position } from './position';
+
 export interface Player {
     _id: string;
     name: string;
-    position: string;
+    position: Position;
     shirtNumber: number;
-    nationality: string;
+    nationality: Nation;
     imageUrl: string;
     club: string;
 }

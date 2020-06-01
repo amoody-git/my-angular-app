@@ -3,9 +3,9 @@ const Player = require('../models/player');
 exports.searchPlayers = (req, res, next) => {
     const queryParams = {};
     
-    const clubId = req.query.clubId;
-    if (clubId) {
-        queryParams.club = clubId;
+    const club = req.query.club;
+    if (club) {
+        queryParams.club = club;
     }
     
     const playerQuery = Player.find(queryParams);
@@ -20,7 +20,9 @@ exports.searchPlayers = (req, res, next) => {
     }
 
     playerQuery
-        .then(documents => {
+        .populate('position')
+        .populate('nationality')
+        .exec((err, documents) => {
             res.status(200).json(documents);
         });
 }

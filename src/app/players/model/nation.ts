@@ -3,3 +3,7 @@ export interface Nation {
     name: string;
     flagUrl: string;
 }
+
+export function sortNationsByName(a: Nation, b: Nation): number {
+    return a.name.localeCompare(b.name);
+}
